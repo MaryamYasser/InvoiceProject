@@ -38,6 +38,36 @@ public class InvoiceController {
 
    }
 
+    public Object[][] getInvoiceLineData(int invoiceNum){
+
+        ArrayList<String[]> stringInvoices = new ArrayList<>();
+        FileOperations controller = new FileOperations();
+        ArrayList<InvoiceHeader> HeaderData = controller.ReadHeaderCSV();
+        InvoiceHeader chosenHeader = HeaderData.get(0);
+        for (InvoiceHeader header: HeaderData
+             ) {
+            if (header.getInvoiceNum() == invoiceNum){
+                 chosenHeader = header;
+                break;
+            }
+
+
+        }
+
+
+        for (InvoiceLine invoiceLine: chosenHeader.getInvoiceLines()
+        ) {
+            stringInvoices.add(new String[]{Integer.toString(invoiceLine.getId()),invoiceLine.getName()
+                    , String.valueOf(invoiceLine.getPrice()), String.valueOf(invoiceLine.getCount()), Float.toString(chosenHeader.getInvoiceTotal())});
+        }
+        Object [][] myArray = new String[stringInvoices.size()][];
+        stringInvoices.toArray(myArray);
+
+        return myArray;
+
+
+    }
+
 
     public void DeleteInvoice(int id){
         InvoiceLine removedItem = null; //maybe null pointer exception
