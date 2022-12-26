@@ -14,24 +14,30 @@ public class View {
         JFrame frame = new JFrame("Create JFrame Example");
         frame.setLocation(100, 100);
         frame.setSize(new Dimension(1024, 800));
-
         GridLayout layout = new GridLayout(1, 2);
         frame.setLayout(layout);
 
-
+        // LEFT PANEL
         JPanel panelLeft = new JPanel();
 
         String[] columnNames = { "No.", "Date", "Customer","Total" };
         Object[][] data2 = controller.getData();
-
         JTable jt=new JTable(data2,columnNames);
-
         jt.setBounds(30,40,200,300);
         JScrollPane sp=new JScrollPane(jt);
         panelLeft.add(sp);
 
+        JButton CreateButton = new JButton("Create Invoice");
+        panelLeft.add(CreateButton);
+
+        JButton DeleteButton = new JButton("Delete Invoice");
+        panelLeft.add(DeleteButton);
+
+
+
         frame.add(panelLeft, BorderLayout.WEST);
 
+        // RIGHT PANEL
 
         JPanel panelRight = new JPanel();
         GridLayout layout_Right = new GridLayout(2,1);
@@ -40,11 +46,6 @@ public class View {
         JPanel panelRightNorth = new JPanel();
         GridLayout layout_RightNorth = new GridLayout(4, 2);
         panelRightNorth.setLayout(layout_RightNorth);
-
-
-
-
-
 
 
 
@@ -125,6 +126,32 @@ public class View {
                 DefaultTableModel tableModel = new DefaultTableModel(controller.getInvoiceLineData(Integer.parseInt(selected_InvoiceNum)),columnNames_R);
 
                 jt_south.setModel(tableModel);
+
+                DeleteButton.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        //your actions
+                        controller.DeleteInvoice(Integer.parseInt(selected_InvoiceNum));
+                        DefaultTableModel tableModel_ = new DefaultTableModel(controller.getData(),columnNames);
+
+                        jt.setModel(tableModel_);
+
+                    }
+                });
+
+                CreateButton.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        //your actions
+                        //controller.DeleteInvoice(Integer.parseInt(selected_InvoiceNum));
+                       // DefaultTableModel tableModel_ = new DefaultTableModel(controller.getData(),columnNames);
+
+                       // jt.setModel(tableModel_);
+
+                    }
+                });
 
             }
             @Override

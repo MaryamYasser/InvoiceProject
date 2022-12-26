@@ -10,19 +10,23 @@ import Model.InvoiceLine;
 import Model.InvoiceHeader;
 
 public class InvoiceController {
-    List <InvoiceLine> invoiceLines = new ArrayList<>();
-    Map<Integer, Float> totalMap = new HashMap<Integer,Float>();
+    ArrayList<InvoiceHeader> HeaderData = new ArrayList<>();
 
-    ArrayList<String[]> stringInvoices = new ArrayList<>();
+    //CONSTRUCTOR INITIALIZES CONTROLLER WITH HEADER DATA FROM FILE
+    public InvoiceController(){
+        FileOperations controller = new FileOperations();
+        this.HeaderData = controller.ReadHeaderCSV();
+
+    }
+
     
 
+    //getData transforms data to objects front end can read
 
    public Object[][] getData(){
 
        ArrayList<String[]> stringOverviewInvoices = new ArrayList<>();
        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-       FileOperations controller = new FileOperations();
-       ArrayList<InvoiceHeader> HeaderData = controller.ReadHeaderCSV();
 
 
        for (InvoiceHeader invoiceHeader: HeaderData
@@ -38,11 +42,11 @@ public class InvoiceController {
 
    }
 
+
+   //getInvoiceLineData returns arraylist of InvoiceLines of specific header data Invoice
     public Object[][] getInvoiceLineData(int invoiceNum){
 
         ArrayList<String[]> stringInvoices = new ArrayList<>();
-        FileOperations controller = new FileOperations();
-        ArrayList<InvoiceHeader> HeaderData = controller.ReadHeaderCSV();
         InvoiceHeader chosenHeader = HeaderData.get(0);
         for (InvoiceHeader header: HeaderData
              ) {
@@ -71,24 +75,29 @@ public class InvoiceController {
 
     public void DeleteInvoice(int id){
         InvoiceLine removedItem = null; //maybe null pointer exception
-        for (InvoiceLine item: invoiceLines
-             ) {
-            if (item.getId() == id){
-                 removedItem = item;
+        for (InvoiceHeader header : HeaderData
+        ) {
+            if (header.getInvoiceNum() == id) {
+               HeaderData.remove(header);
                 break;
             }
+
         }
-        invoiceLines.remove(removedItem);
-        //remove price from total
+
     }
 
-    public void CreateInvoice(int id, String type, float price, int quantity){
+    public void CreateInvoice(int id, String type, float price, int quantity) {
         InvoiceLine invoiceLine = new InvoiceLine(id, type, price, quantity);
-        invoiceLines.add(invoiceLine);
 
 
-        totalMap.put(invoiceLine.getId(), totalMap.containsKey(invoiceLine.getId()) ? totalMap.get(invoiceLine.getId())
-                + (invoiceLine.getPrice() * invoiceLine.getCount()) : (invoiceLine.getPrice() * invoiceLine.getCount()));
+        for (InvoiceHeader header : HeaderData
+        ) {
+            if (header.getInvoiceNum() == id) {
+                header.getInvoiceLines().add(invoiceLine);
+                break;
+            }
+
+        }
 
     }
 
