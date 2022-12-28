@@ -106,6 +106,19 @@ public class View {
 
         frame.setVisible(true);
 
+        DeleteButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //your actions
+                controller.DeleteInvoice(Integer.parseInt( (String) jt.getValueAt(jt.getSelectedRow() , 0)));
+                DefaultTableModel tableModel_ = new DefaultTableModel(controller.getData(),columnNames);
+
+                jt.setModel(tableModel_);
+
+            }
+        });
+
         jt.addMouseListener(new MouseListener() {
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -127,18 +140,7 @@ public class View {
 
                 jt_south.setModel(tableModel);
 
-                DeleteButton.addActionListener(new ActionListener() {
 
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        //your actions
-                        controller.DeleteInvoice(Integer.parseInt(selected_InvoiceNum));
-                        DefaultTableModel tableModel_ = new DefaultTableModel(controller.getData(),columnNames);
-
-                        jt.setModel(tableModel_);
-
-                    }
-                });
 
                 CreateButton.addActionListener(new ActionListener() {
 

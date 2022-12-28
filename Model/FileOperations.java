@@ -2,12 +2,16 @@ package Model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
+
 
 public class FileOperations {
 
@@ -37,9 +41,9 @@ public class FileOperations {
             InvoiceLine invoiceLine = new InvoiceLine(id, type, price, quantity);
             invoiceLines.add(invoiceLine);
 
-            for (InvoiceHeader invoiceHeader: invoiceHeaders
+            for (InvoiceHeader invoiceHeader : invoiceHeaders
             ) {
-                if (invoiceLine.getId() == invoiceHeader.getInvoiceNum()){
+                if (invoiceLine.getId() == invoiceHeader.getInvoiceNum()) {
                     invoiceHeader.getInvoiceLines().add(invoiceLine);
                     break;
                 }
@@ -47,11 +51,7 @@ public class FileOperations {
             }
 
 
-
-
-
         }
-
 
 
     }
@@ -80,25 +80,16 @@ public class FileOperations {
             LocalDate date = LocalDate.parse(tokens[1], df);
             String invoiceOwner = tokens[2];
 
-
-
-
-
             InvoiceHeader invoiceHeader = new InvoiceHeader(id, date, invoiceOwner);
 
-
-
             invoiceHeaderItems.add(invoiceHeader);
-
-
-
         }
 
         //
         ReadItemsCSV(invoiceHeaderItems);
 
-        for (InvoiceHeader invoiceHeader: invoiceHeaderItems
-             ) {
+        for (InvoiceHeader invoiceHeader : invoiceHeaderItems
+        ) {
             System.out.println("Item" + invoiceHeader + "ItemLines: " + invoiceHeader.getInvoiceLines().size());
 
         }
@@ -106,4 +97,5 @@ public class FileOperations {
 
         return invoiceHeaderItems;
     }
+
 }

@@ -74,7 +74,6 @@ public class InvoiceController {
 
 
     public void DeleteInvoice(int id){
-        InvoiceLine removedItem = null; //maybe null pointer exception
         for (InvoiceHeader header : HeaderData
         ) {
             if (header.getInvoiceNum() == id) {
