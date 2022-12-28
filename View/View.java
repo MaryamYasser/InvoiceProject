@@ -119,6 +119,19 @@ public class View {
             }
         });
 
+        CreateButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //your actions
+                //controller.DeleteInvoice(Integer.parseInt(selected_InvoiceNum));
+                // DefaultTableModel tableModel_ = new DefaultTableModel(controller.getData(),columnNames);
+
+                // jt.setModel(tableModel_);
+
+            }
+        });
+
         jt.addMouseListener(new MouseListener() {
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -142,18 +155,7 @@ public class View {
 
 
 
-                CreateButton.addActionListener(new ActionListener() {
 
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        //your actions
-                        //controller.DeleteInvoice(Integer.parseInt(selected_InvoiceNum));
-                       // DefaultTableModel tableModel_ = new DefaultTableModel(controller.getData(),columnNames);
-
-                       // jt.setModel(tableModel_);
-
-                    }
-                });
 
             }
             @Override

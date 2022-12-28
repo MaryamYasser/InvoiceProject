@@ -19,7 +19,7 @@ public class FileOperations {
 
     public void ReadItemsCSV(ArrayList<InvoiceHeader> invoiceHeaders) {
         ArrayList<InvoiceLine> invoiceLines = new ArrayList<>();
-        File inFile = new File("C:\\Users\\myaali.LPALXY0878\\Downloads\\sales-invoice-generator\\Sales Invoice Generator\\InvoiceLine.csv");
+        File inFile = new File("src/InvoiceLine.csv");
         Scanner inputFile = null;
         try {
             inputFile = new Scanner(inFile);
@@ -61,7 +61,7 @@ public class FileOperations {
         //String[][] myArray;
 
         ArrayList<InvoiceHeader> invoiceHeaderItems = new ArrayList<>();
-        File inFile = new File("C:\\Users\\myaali.LPALXY0878\\Downloads\\sales-invoice-generator\\Sales Invoice Generator\\InvoiceHeader.csv");
+        File inFile = new File("src/InvoiceHeader.csv");
         Scanner inputFile = null;
         try {
             inputFile = new Scanner(inFile);
