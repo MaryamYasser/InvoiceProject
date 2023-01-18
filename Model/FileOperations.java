@@ -4,12 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Stream;
 
 
@@ -96,6 +94,37 @@ public class FileOperations {
 
 
         return invoiceHeaderItems;
+    }
+
+    public void WriteCSV(ArrayList<InvoiceHeader> invoiceHeaders){
+        try {
+            FileWriter readcsv_Header = new FileWriter("src/newHeaders.csv");
+            FileWriter readcsv_Line = new FileWriter("src/newLines.csv");
+
+            ArrayList<InvoiceLine> newInvoiceLines = new ArrayList<>();
+            for (InvoiceHeader invoiceHeader: invoiceHeaders
+                 ) {
+                readcsv_Header.append(invoiceHeader.toString_csv());
+                newInvoiceLines.addAll(invoiceHeader.getInvoiceLines());
+
+
+            }
+
+            for (InvoiceLine invoiceLine: newInvoiceLines
+            ) {
+                readcsv_Line.append(invoiceLine.toString());
+            }
+
+            readcsv_Header.close();
+            readcsv_Line.close();
+
+
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }

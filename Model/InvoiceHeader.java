@@ -22,6 +22,11 @@ public class InvoiceHeader {
         return  getInvoiceNum() + ", " + getInvoiceDate() + ", " + getCustomerName() + ", " + getInvoiceTotal();
     }
 
+    public String toString_csv() {
+        return  getInvoiceNum() + ", " + getInvoiceDate() + ", " + getCustomerName();
+    }
+
+
     public int getInvoiceNum() {
         return invoiceNum;
     }

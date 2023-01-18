@@ -11,11 +11,17 @@ import Model.InvoiceHeader;
 
 public class InvoiceController {
     ArrayList<InvoiceHeader> HeaderData = new ArrayList<>();
+    FileOperations controller = new FileOperations();
 
     //CONSTRUCTOR INITIALIZES CONTROLLER WITH HEADER DATA FROM FILE
     public InvoiceController(){
-        FileOperations controller = new FileOperations();
+
         this.HeaderData = controller.ReadHeaderCSV();
+
+    }
+
+    public void WriteData(){
+        controller.WriteCSV(HeaderData);
 
     }
 

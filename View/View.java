@@ -33,6 +33,11 @@ public class View {
         JButton DeleteButton = new JButton("Delete Invoice");
         panelLeft.add(DeleteButton);
 
+        JButton SaveButton = new JButton("Save Invoice");
+        panelLeft.add(SaveButton);
+
+
+
 
 
         frame.add(panelLeft, BorderLayout.WEST);
@@ -116,6 +121,13 @@ public class View {
 
                 jt.setModel(tableModel_);
 
+            }
+        });
+
+        SaveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.WriteData();
             }
         });
 
