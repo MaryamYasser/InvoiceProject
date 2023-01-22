@@ -4,11 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Stream;
 
 
 public class FileOperations {
@@ -17,7 +15,7 @@ public class FileOperations {
 
     public void ReadItemsCSV(ArrayList<InvoiceHeader> invoiceHeaders) {
         ArrayList<InvoiceLine> invoiceLines = new ArrayList<>();
-        File inFile = new File("src/InvoiceLine.csv");
+        File inFile = new File("InvoiceLine.csv");
         Scanner inputFile = null;
         try {
             inputFile = new Scanner(inFile);
@@ -59,7 +57,7 @@ public class FileOperations {
         //String[][] myArray;
 
         ArrayList<InvoiceHeader> invoiceHeaderItems = new ArrayList<>();
-        File inFile = new File("src/InvoiceHeader.csv");
+        File inFile = new File("InvoiceHeader.csv");
         Scanner inputFile = null;
         try {
             inputFile = new Scanner(inFile);
@@ -98,8 +96,8 @@ public class FileOperations {
 
     public void WriteCSV(ArrayList<InvoiceHeader> invoiceHeaders){
         try {
-            FileWriter readcsv_Header = new FileWriter("src/newHeaders.csv");
-            FileWriter readcsv_Line = new FileWriter("src/newLines.csv");
+            FileWriter readcsv_Header = new FileWriter("newHeaders.csv");
+            FileWriter readcsv_Line = new FileWriter("newLines.csv");
 
             ArrayList<InvoiceLine> newInvoiceLines = new ArrayList<>();
             for (InvoiceHeader invoiceHeader: invoiceHeaders
